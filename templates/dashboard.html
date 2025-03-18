@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Password Manager</title>
+</head>
+<body style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100vh;">
+
+    <h1>Password Manager</h1>
+
+    <h2>Add New Password</h2>
+    <form action="{{ url_for('routes.add_password') }}" method="POST" style="display: flex; flex-direction: column; gap: 10px;">
+        <label for="website">Website/App:</label>
+        <input type="text" id="website" name="website" required>
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Save</button>
+    </form>
+
+    <h2>Your Saved Passwords</h2>
+    <table border="1" style="margin-top: 20px; border-collapse: collapse; text-align: center;">
+        <thead>
+            <tr>
+                <th>Website/App</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in passwords %}
+            <tr>
+                <td>{{ entry.website }}</td>
+                <td>{{ entry.username }}</td>
+                <td>********</td>
+                <td>
+                    <form action="{{ url_for('delete_password', entry_id=entry.id) }}" method="POST">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <form action="{{ url_for('logout') }}" method="POST" style="margin-top: 20px;">
+        <a href="{{ url_for('routes.view_passwords') }}">View Saved Passwords</a>
+
+        <button type="submit">Logout</button>
+    </form>
+
+</body>
+</html>

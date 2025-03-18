@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Password Manager</title>
+</head>
+<body>
+    <center>
+        <h2>🔐 Password Manager</h2>
+        <h3>Create Your Account</h3>
+        <p>Secure your passwords with top-notch encryption.</p>
+
+        <form action="{{ url_for('routes.register') }}" method="POST">
+            <div>
+                <label for="username">Username or Email:</label><br>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <br>
+            <div>
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <br>
+            <button type="submit">Sign Up</button>
+        </form>
+        <br>
+        <p>Already have an account? <a href="{{ url_for('routes.login') }}">Login here</a></p>
+        <br>
+        <p>&copy; 2025 Password Manager. All rights reserved.</p>
+    </center>
+</body>
+</html>
